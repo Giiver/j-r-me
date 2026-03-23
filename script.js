@@ -84,6 +84,32 @@ const revealElements = () => {
 document.addEventListener('DOMContentLoaded', revealElements);
 
 /* ============================================
+   Testimonials — Read more / Collapse toggle
+   ============================================ */
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.testimonials__card').forEach(card => {
+        const text = card.querySelector('.testimonials__text');
+        const toggle = card.querySelector('.testimonials__toggle');
+        if (!text || !toggle) return;
+
+        if (text.scrollHeight > text.clientHeight + 2) {
+            toggle.classList.add('visible');
+        }
+
+        toggle.addEventListener('click', () => {
+            const isExpanded = text.classList.contains('expanded');
+            if (isExpanded) {
+                text.classList.remove('expanded');
+                toggle.textContent = '[...] Lire la suite';
+            } else {
+                text.classList.add('expanded');
+                toggle.textContent = 'Réduire';
+            }
+        });
+    });
+});
+
+/* ============================================
    Smooth scroll for anchor links
    ============================================ */
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
